@@ -1,16 +1,35 @@
 # A simple PHP CAPTCHA script
 
-This packaged is modified by Ali Khalili
+This packaged is modified version of [simple-php-captcha](https://github.com/yasirmturk/simple-php-captcha).
 
-_Written by Cory LaViska for A Beautiful Site, LLC.  (http://abeautifulsite.net/)_
+This code is the object oriented version of the original code.
+
+I also tried to do minor improvement (dynamic path for fonts and background images)
 
 _Licensed under the MIT license: http://opensource.org/licenses/MIT_
 
-## Demo and Usage
+## Basic usage
+0 - Install the package:
+```
+composer install alikhalili/simple-captcha
+```
 
-http://labs.abeautifulsite.net/simple-php-captcha/
+1- Create a captcha object:
+```
+$captcha = new Captcha();
+```
 
-## Attribution
+2- Draw image
+```
+$captcha->config();
+echo $capthca->getImage();
+```
+or validate the code:
+```
+$captchaIsValid = $captcha->verify($givenCode);
+```
 
+## Thanks
+ - Thanks to Cory LaViska for the base code. 
  - Special thanks to Subtle Patterns for the patterns used for default backgrounds: http://subtlepatterns.com/
  - Special thanks to dafont.com for providing Times New Yorker: http://www.dafont.com/

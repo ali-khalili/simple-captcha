@@ -4,20 +4,13 @@ namespace AliKhalili\Captcha;
 
 class Captcha
 {
-    /**
-     * destroy the session key
-     */
-    public function destroySessionKey()
-    {
-        unset($_SESSION["captcha"]);
-    }
+    private $fontPath;
+    private $backgroundPath;
 
     /**
-     * Get the base64 encoding of the image
-     * @return string
-     * @throws \Exception
+     * Captcha constructor.
      */
-    public function getImage()
+    public function __construct()
     {
         if (!function_exists('session_status')) {
             function session_status()
@@ -46,7 +39,39 @@ class Captcha
                 return $return_string ? implode($separator, $rgb_array) : $rgb_array;
             }
         }
+    }
 
+    /**
+     * @param string $path
+     */
+    public function setFontPath($path)
+    {
+        $this->fontPath = $path;
+    }
+
+    /**
+     * @param string $path
+     */
+    public function setBackgroundPath($path)
+    {
+        $this->backgroundPath = $path;
+    }
+
+    /**
+     * destroy the session key
+     */
+    public function destroySessionKey()
+    {
+        unset($_SESSION["captcha"]);
+    }
+
+    /**
+     * Get the base64 encoding of the image
+     * @return string
+     * @throws \Exception
+     */
+    public function getImage()
+    {
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
@@ -140,6 +165,24 @@ class Captcha
     }
 
     /**
+     * @param string $directory
+     * @return array
+     */
+    private function filesInDirectory($directory)
+    {
+        $files = [];
+        if ($handle = opendir($directory)) {
+            while (false !== ($entry = readdir($handle))) {
+                if ($entry != "." && $entry != "..") {
+                    $files [] = $directory . '/' . $entry;
+                }
+            }
+            closedir($handle);
+        }
+        return $files;
+    }
+
+    /**
      * call this function before drawImage
      * @param array $config
      * @return array
@@ -152,27 +195,16 @@ class Captcha
             throw new \Exception('Required GD library is missing');
         }
 
-        $bg_path = dirname(__FILE__) . '/../assets/backgrounds/';
-        $font_path = dirname(__FILE__) . '/../assets/fonts/';
+        $bg_path = $this->backgroundPath ?? dirname(__FILE__) . '/../assets/backgrounds/';
+        $font_path = $this->fontPath ?? dirname(__FILE__) . '/../assets/fonts/';
 
         // Default values
         $captcha_config = array(
             'code' => '',
             'min_length' => 5,
             'max_length' => 5,
-            'backgrounds' => array(
-                $bg_path . '45-degree-fabric.png',
-                $bg_path . 'cloth-alike.png',
-                $bg_path . 'grey-sandbag.png',
-                $bg_path . 'kinda-jean.png',
-                $bg_path . 'polyester-lite.png',
-                $bg_path . 'stitched-wool.png',
-                $bg_path . 'white-carbon.png',
-                $bg_path . 'white-wave.png'
-            ),
-            'fonts' => array(
-                $font_path . 'times_new_yorker.ttf'
-            ),
+            'backgrounds' => $this->filesInDirectory($bg_path),
+            'fonts' => $this->filesInDirectory($font_path),
             'characters' => '0123456789', //'ABCDEFGHJKLMNPRSTUVWXYZabcdefghjkmnprstuvwxyz23456789',
             'min_font_size' => 28,
             'max_font_size' => 28,
