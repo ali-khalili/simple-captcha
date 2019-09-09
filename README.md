@@ -4,7 +4,7 @@ This packaged is modified version of [simple-php-captcha](https://github.com/yas
 
 This code is the object oriented version of the original code.
 
-I also tried to do minor improvement (dynamic path for fonts and background images)
+I also tried to do minor improvements (dynamic path for fonts and background images)
 
 _Licensed under the MIT license: http://opensource.org/licenses/MIT_
 
@@ -22,7 +22,13 @@ $captcha = new Captcha();
 2- Draw image
 ```
 $captcha->config();
-echo $capthca->getImage();
+$image = $capthca->getImage();
+
+//in the view
+echo "<img src='$image' />";
+
+//or in ajax response to a refresh request:
+echo $image;
 ```
 or validate the code:
 ```
