@@ -3,6 +3,10 @@
   "description": "A simple PHP CAPTCHA script",
   "version": "1.0.1",
   "license": "MIT",
+  "require": {
+    "php": ">=7.0",
+    "ext-gd": "*"
+  },
   "autoload": {
     "psr-4": {
       "AliKhalili\\Captcha\\": "src/"
