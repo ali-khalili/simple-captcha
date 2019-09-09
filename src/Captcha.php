@@ -13,10 +13,11 @@ class Captcha
     }
 
     /**
+     * Get the base64 encoding of the image
      * @return string
      * @throws \Exception
      */
-    public function drawImage()
+    public function getImage()
     {
         if (!function_exists('session_status')) {
             function session_status()
