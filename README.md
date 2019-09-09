@@ -1,5 +1,7 @@
 # A simple PHP CAPTCHA script
 
+This packaged is modified by Ali Khalili
+
 _Written by Cory LaViska for A Beautiful Site, LLC.  (http://abeautifulsite.net/)_
 
 _Licensed under the MIT license: http://opensource.org/licenses/MIT_
