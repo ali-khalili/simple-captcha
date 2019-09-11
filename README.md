@@ -36,6 +36,6 @@ $captchaIsValid = $captcha->verify($givenCode);
 ```
 
 ## Thanks
- - Thanks to Cory LaViska for the base code. 
+ - Thanks to Cory LaViska for the base code and Yasir M Türk for the [forked repository](https://github.com/yasirmturk/simple-php-captcha). 
  - Special thanks to Subtle Patterns for the patterns used for default backgrounds: http://subtlepatterns.com/
  - Special thanks to dafont.com for providing Times New Yorker: http://www.dafont.com/
