@@ -11,7 +11,7 @@ _Licensed under the MIT license: http://opensource.org/licenses/MIT_
 ## Basic usage
 0 - Install the package:
 ```
-composer install alikhalili/simple-captcha
+composer require alikhalili/simple-captcha
 ```
 
 1- Create a captcha object:
