@@ -39,6 +39,10 @@ class Captcha
                 return $return_string ? implode($separator, $rgb_array) : $rgb_array;
             }
         }
+
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
     }
 
     /**
@@ -72,10 +76,6 @@ class Captcha
      */
     public function getImage()
     {
-        if (session_status() == PHP_SESSION_NONE) {
-            session_start();
-        }
-
         $captcha_config = unserialize($_SESSION['_CAPTCHA']['config']);
         if (!$captcha_config)
             exit();
