@@ -19,7 +19,7 @@ class Captcha
             }
         }
 
-        if (!function_exists('hex2rgb')) {
+        if (!function_exists('hex2rgb') && !function_exists(__NAMESPACE__ . '\hex2rgb')) {
             function hex2rgb($hex_str, $return_string = false, $separator = ',')
             {
                 $hex_str = preg_replace("/[^0-9A-Fa-f]/", '', $hex_str); // Gets a proper hex string
